@@ -48,6 +48,7 @@ public class JFCliente extends javax.swing.JFrame {
         din = new DataInputStream(socket.getInputStream());
         dout = new DataOutputStream(socket.getOutputStream());
         btnConectar.setText("Desconectar");
+        btnConectar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/stop.png")));
         new Thread(() -> {
             try {
                 recibirInformacion();
@@ -90,6 +91,7 @@ public class JFCliente extends javax.swing.JFrame {
      */
     private void desconectar() throws IOException {
         btnConectar.setText("Conectar");
+        btnConectar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/conectado.png")));
         socket.close();
     }
 
@@ -149,6 +151,7 @@ public class JFCliente extends javax.swing.JFrame {
         taComentario.setWrapStyleWord(true);
         jScrollPane2.setViewportView(taComentario);
 
+        btnEnviar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/send.png"))); // NOI18N
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +159,7 @@ public class JFCliente extends javax.swing.JFrame {
             }
         });
 
+        btnConectar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/conectado.png"))); // NOI18N
         btnConectar.setText("Conectar");
         btnConectar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +214,7 @@ public class JFCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConectar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)

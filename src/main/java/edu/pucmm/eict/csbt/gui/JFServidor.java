@@ -29,15 +29,16 @@ public class JFServidor extends javax.swing.JFrame {
     private void iniciar() {
         try {
             btnInicioParada.setText("Parar");
+            btnInicioParada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/stop.png")));
             //obteniendo el puerto:
-            int puerto = Integer.parseInt(txtPuerto.getText());
-            //iniciando el servicio.
-            ServidorComunicacion.getInstacia().iniciarServidor(puerto);
-            
+            int puerto = Integer.parseInt(txtPuerto.getText());            
             //subscribiendo a los eventos del servidor.
             ServidorComunicacion.getInstacia().addObservadorListener((Class clase, Object argumento, Enum anEnum) -> {
                 eventosServidor(clase, argumento, anEnum);
             });
+            //iniciando el servicio.
+            ServidorComunicacion.getInstacia().iniciarServidor(puerto);
+            
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(this, "Error: " + e.getMessage());
         }
@@ -73,6 +74,7 @@ public class JFServidor extends javax.swing.JFrame {
      */
     private void parar() {
         btnInicioParada.setText("Iniciar");
+        btnInicioParada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/conectado.png")));
         System.out.println("Parando el servido vista...");
         ServidorComunicacion.getInstacia().pararServidor();
     }
@@ -116,6 +118,7 @@ public class JFServidor extends javax.swing.JFrame {
 
         jLabel1.setText("Puerto Servidor:");
 
+        btnLimpiarLog.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/limpiarlog.png"))); // NOI18N
         btnLimpiarLog.setText("Limpiar Log");
         btnLimpiarLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,6 +126,7 @@ public class JFServidor extends javax.swing.JFrame {
             }
         });
 
+        btnInicioParada.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/conectado.png"))); // NOI18N
         btnInicioParada.setText("Inicio");
         btnInicioParada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +173,7 @@ public class JFServidor extends javax.swing.JFrame {
                     .addComponent(btnLimpiarLog)
                     .addComponent(btnInicioParada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

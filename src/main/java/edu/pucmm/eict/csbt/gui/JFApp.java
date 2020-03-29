@@ -80,8 +80,9 @@ public class JFApp extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("AplicaciÃ³n Chat Servidor & Cliente TCP");
+        jLabel1.setText("Aplicación Chat Servidor & Cliente TCP");
 
+        btnAbrirServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/server.png"))); // NOI18N
         btnAbrirServidor.setText("Abrir Servidor");
         btnAbrirServidor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +90,7 @@ public class JFApp extends javax.swing.JFrame {
             }
         });
 
+        brnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cliente.png"))); // NOI18N
         brnCliente.setText("Abrir Cliente");
         brnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +98,7 @@ public class JFApp extends javax.swing.JFrame {
             }
         });
 
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salida.png"))); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

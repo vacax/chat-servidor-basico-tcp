@@ -56,6 +56,7 @@ public class ServidorComunicacion implements Runnable {
             servidor.close();
             servidor = null;
             listaManejoComunicacion.clear();
+            subjectHelper.removeAllObserver();
         } catch (IOException ex) {
             Logger.getLogger(ServidorComunicacion.class.getName()).log(Level.SEVERE, null, ex);
         }

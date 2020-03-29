@@ -27,4 +27,11 @@ public class SubjectHelper implements ISubject {
             observador.update(clase, argumento, anEnum);
         }
     }
+    
+    /**
+     * 
+     */
+    public void removeAllObserver(){
+        listaObservadores.clear();
+    }
 }

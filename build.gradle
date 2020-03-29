@@ -23,3 +23,7 @@ dependencies {
 run{
     standardInput = System.in
 }
+
+shadowJar {
+    archiveVersion = ''
+}
