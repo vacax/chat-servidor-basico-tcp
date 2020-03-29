@@ -33,10 +33,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txtPuerto" min="-2" pref="84" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnInicioParada" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="btnInicioParada" linkSize="1" min="-2" pref="109" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnLimpiarLog" min="-2" pref="97" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="86" max="32767" attributes="0"/>
+                      <Component id="btnLimpiarLog" linkSize="1" min="-2" pref="130" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -72,11 +72,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar Log"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarLogActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="btnInicioParada">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inicio"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInicioParadaActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -85,10 +91,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="taLog">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
+            <Property name="lineWrap" type="boolean" value="true"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="wrapStyleWord" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>

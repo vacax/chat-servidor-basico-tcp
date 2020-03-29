@@ -5,17 +5,94 @@
  */
 package edu.pucmm.eict.csbt.gui;
 
+import edu.pucmm.eict.csbt.servicios.ServidorComunicacion;
+import edu.pucmm.eict.csbt.util.IObserver;
+import edu.pucmm.eict.csbt.util.TipoNotificacion;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author carlo
  */
 public class JFServidor extends javax.swing.JFrame {
 
+    //
+    private int conectados = 0;
+    
     /**
      * Creates new form JFServidor
      */
     public JFServidor() {
         initComponents();
+    }
+
+    private void iniciar() {
+        try {
+            btnInicioParada.setText("Parar");
+            //obteniendo el puerto:
+            int puerto = Integer.parseInt(txtPuerto.getText());
+            //iniciando el servicio.
+            ServidorComunicacion.getInstacia().iniciarServidor(puerto);
+            
+            //subscribiendo a los eventos del servidor.
+            ServidorComunicacion.getInstacia().addObservadorListener((Class clase, Object argumento, Enum anEnum) -> {
+                eventosServidor(clase, argumento, anEnum);
+            });
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, "Error: " + e.getMessage());
+        }
+    }
+    
+    /**
+     * 
+     * @param clase
+     * @param argumento
+     * @param anEnum 
+     */
+    public void eventosServidor(Class clase, Object argumento, Enum anEnum){
+        TipoNotificacion tn = (TipoNotificacion) anEnum;
+                switch (tn) {
+                    case LOG:
+                        taLog.append((String) argumento + "\n");
+                        break;
+                    case CONEXION:
+                        conectados++;
+                        taLog.append("Nuevo Cliente Conectado: "+conectados);
+                        break;
+                    case DESCONEXION:
+                        conectados--;
+                        taLog.append("Cliente Des-conectado: "+conectados);                        
+                        break;
+                    default:
+                        System.out.println("Valor recibido no programado");
+                }
+    }
+
+    /**
+     *
+     */
+    private void parar() {
+        btnInicioParada.setText("Iniciar");
+        System.out.println("Parando el servido vista...");
+        ServidorComunicacion.getInstacia().pararServidor();
+    }
+
+    /**
+     *
+     */
+    private void procesoInicioParar() {
+        if (btnInicioParada.isSelected()) {
+            iniciar();
+        } else {
+            parar();
+        }
+    }
+
+    /**
+     *
+     */
+    private void limpiarLogs() {
+        taLog.setText("");
     }
 
     /**
@@ -32,7 +109,7 @@ public class JFServidor extends javax.swing.JFrame {
         btnLimpiarLog = new javax.swing.JButton();
         btnInicioParada = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        taLog = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Servidor Clone IRC");
@@ -40,12 +117,25 @@ public class JFServidor extends javax.swing.JFrame {
         jLabel1.setText("Puerto Servidor:");
 
         btnLimpiarLog.setText("Limpiar Log");
+        btnLimpiarLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarLogActionPerformed(evt);
+            }
+        });
 
         btnInicioParada.setText("Inicio");
+        btnInicioParada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInicioParadaActionPerformed(evt);
+            }
+        });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        taLog.setEditable(false);
+        taLog.setColumns(20);
+        taLog.setLineWrap(true);
+        taLog.setRows(5);
+        taLog.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(taLog);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,12 +150,15 @@ public class JFServidor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPuerto, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnInicioParada, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnInicioParada, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiarLog, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 86, Short.MAX_VALUE)))
+                        .addComponent(btnLimpiarLog, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnInicioParada, btnLimpiarLog});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -82,6 +175,14 @@ public class JFServidor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInicioParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioParadaActionPerformed
+        procesoInicioParar();
+    }//GEN-LAST:event_btnInicioParadaActionPerformed
+
+    private void btnLimpiarLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarLogActionPerformed
+        limpiarLogs();
+    }//GEN-LAST:event_btnLimpiarLogActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,7 +224,7 @@ public class JFServidor extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiarLog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea taLog;
     private javax.swing.JTextField txtPuerto;
     // End of variables declaration//GEN-END:variables
 }

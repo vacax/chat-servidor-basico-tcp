@@ -8,11 +8,42 @@ package edu.pucmm.eict.csbt.encapsulaciones;
 import java.util.Date;
 
 /**
- *
- * @author carlo
+ * Clase para encapsular la información del mensaje.
+ * @author vacax
  */
 public class Mensaje {
+
     String usuario;
     Date fecha;
     String mensaje;
+
+    public Mensaje(String usuario, String mensaje, Date fecha) {
+        this.usuario = usuario;
+        this.mensaje = mensaje;
+        this.fecha = fecha;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
 }
