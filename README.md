@@ -1,4 +1,4 @@
-# Chat Servidor Basico TCP
+# Chat Servidor Básico TCP
 
 Ejemplo de como utilizar la comunicación TCP en Java mediante los ServerSocket y Socket. 
 Simulando el siguiente esquema:
