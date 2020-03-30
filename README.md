@@ -12,7 +12,7 @@ en la carpeta del proyecto:
 >> `gradlew run`
 
 > Para Ejecutar en Windows:
->> `gradle.bat run`
+>> `gradlew.bat run`
 
 ## Ejecutar directamente del jar
 
