@@ -80,7 +80,7 @@ public class JFApp extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Aplicación Chat Servidor & Cliente TCP");
+        jLabel1.setText("AplicaciÃ³n Chat Servidor & Cliente TCP");
 
         btnAbrirServidor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/server.png"))); // NOI18N
         btnAbrirServidor.setText("Abrir Servidor");
